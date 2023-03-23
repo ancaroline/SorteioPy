@@ -1,5 +1,7 @@
 from typing import List, Dict
 from time import sleep
+import random
+import numpy
 
 from models.cartao import Cartao
 
@@ -44,7 +46,15 @@ def menu() -> None:
 
 
 def numeros_aleatorios() -> None:
-    pass
+    print('Random Numbers')
+    print('===============')
+
+    cartao = Cartao([], [])
+
+    def select_random(aleatory: List) -> List:
+        return numpy.random.choice(aleatory, 20, False)
+
+    print(select_random(cartao.num_cartao()))
 
 
 def numeros_tecnica() -> None:
