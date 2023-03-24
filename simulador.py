@@ -5,6 +5,9 @@ import numpy
 
 from models.cartao import Cartao
 
+num_cartao = []
+num_selecionados = []
+
 
 def main() -> None:
     menu()
@@ -46,15 +49,18 @@ def menu() -> None:
 
 
 def numeros_aleatorios() -> None:
-    print('Random Numbers')
-    print('===============')
+    print('20 Números Aleatórios Selecionados')
+    print('==================================')
 
     cartao = Cartao([], [])
 
     def select_random(aleatory: List) -> List:
         return numpy.random.choice(aleatory, 20, False)
 
+    # falta colocar os números em ordem crescente
     print(select_random(cartao.num_cartao()))
+    sleep(2)
+    menu()
 
 
 def numeros_tecnica() -> None:
@@ -66,7 +72,46 @@ def escolher_numeros() -> None:
 
 
 def verificar_acertos() -> None:
-    pass
+    print('Verificando Acertos')
+    print('====================')
+    sleep(1)
+    print("Você já possui números no sistema?")
+    sleep(1)
+    check: str = input("Você gostaria de utilizá-los neste momento? (y/n)")
+    if check == 'n':
+        quant: int = int(input("Quantos números, contidos no seu cartão, você deseja verificar?"))
+
+        # Quantidade
+        if quant == 50:
+            while quant < 51:
+                quant -= 1
+                if quant == -1:
+                    break
+                else:
+                    n: int = int(input("Digite os seus números: "))
+                    num_cartao.append(n)
+                    print(num_cartao)
+
+            num_sort: List = []
+            for n1 in range(20):
+                n1: int = int(input('Digite os números sorteados: '))
+                num_sort.append(n1)
+                print(num_sort)
+
+            # Verificando se num_cartao está dentro de num_sort
+            cont = 0
+            for elem in num_sort:
+                if elem in num_cartao:
+                    cont = cont + 1
+            print(f"Você obteve {cont} acerto(s).")
+            sleep(3)
+            menu()
+        else:
+            print("Este valor não é suportado.")
+            sleep(2)
+            menu()
+    else:
+        pass
 
 
 def limpar_simulador() -> None:
